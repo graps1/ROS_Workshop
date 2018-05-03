@@ -88,10 +88,6 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * uncomment the "generate_dynamic_reconfigure_options" section below
 ##     and list every .cfg file to be processed
 
-## Generate dynamic reconfigure parameters in the 'cfg' folder
-generate_dynamic_reconfigure_options(       
-     cfg/Position.cfg
-)
 
 ###################################
 ## catkin specific configuration ##
@@ -201,3 +197,7 @@ include_directories(
 add_executable(point_a_node_skeleton src/point_a_node_skeleton.cpp)
 target_link_libraries(point_a_node_skeleton ${catkin_LIBRARIES})
 add_dependencies(point_a_node_skeleton ${PROJECT_NAME}_gencfg)
+
+add_executable(point_b_node_ src/point_b_node_.cpp)
+target_link_libraries(point_b_node_ ${catkin_LIBRARIES})
+add_dependencies(point_b_node_ ${PROJECT_NAME}_gencfg)
