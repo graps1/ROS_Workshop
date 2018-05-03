@@ -1,0 +1,9 @@
+<launch>
+
+    <node name="point_a" pkg="minigame" type="point_a_node">
+    </node>
+
+    <node name="point_a" pkg="minigame" type="point_a_node">
+    </node>
+ 
+</launch>
