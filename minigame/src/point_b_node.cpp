@@ -1,27 +1,41 @@
 #include <ros/ros.h>
 #include <geometry_msgs/PointStamped.h>
 
-ros::Subscriber sub_position;
-ros::Publisher pub_position;
 
-void callback(const geometry_msgs::PointStamped::ConstPtr &msg) {
-  geometry_msgs::PointStamped pointStampedB;
-  pointStampedB.point.x = msg->point.x + 5;
-  pointStampedB.point.y = msg->point.y + 5;  
-  pointStampedB.header.frame_id = "/map";
-  pointStampedB.header.stamp = ros::Time::now();
-  pub_position.publish(pointStampedB);  
-}
+ros::Publisher pub_position;
 
 /** Main node entry point. */
 int main(int argc, char **argv)
 {
+
+  //node initialisieren
   ros::init(argc, argv, "point_b_node");
   ros::NodeHandle nh;
 
-  sub_position = nh.subscribe<geometry_msgs::PointStamped>("/positionA", 1, callback);
+  //publisher definieren 
   pub_position = nh.advertise<geometry_msgs::PointStamped>("/positionB", 1);
 
-  ros::spin();
+  //PunktB erstellen
+  geometry_msgs::PointStamped pointStampedB;
+  pointStampedB.header.frame_id = "/map";
+
+  //fängt in punkt 0,0 an
+  pointStampedB.point.x = 0;
+  pointStampedB.point.y = 0; 
+
+  ros::Rate rate(2); // 2 hz
+  while (ros::ok()) {
+
+    //set new random position
+    pointStampedB.point.x += ( (rand() % 100) / 50.0 ) - 1.0;
+    pointStampedB.point.y += ( (rand() % 100) / 50.0 ) - 1.0;  
+      
+    //publish point  
+    pointStampedB.header.stamp = ros::Time::now();
+    pub_position.publish(pointStampedB); 
+    rate.sleep(); 
+    ros::spinOnce();
+	  
+  }
   return 0;
 }
