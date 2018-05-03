@@ -1,0 +1,22 @@
+<launch>
+
+    <!-- start both nodes-->
+    <node name="point_a" pkg="minigame" type="point_a_node">
+        <param name="start_x" value="1.0"/>
+        <param name="start_y" value="2.0"/>
+    </node>
+
+    <node name="point_b" pkg="minigame" type="point_b_node">
+    </node>
+
+    <!-- start rviz-->
+    <node name="rviz" pkg="rviz" type="rviz">
+    </node>
+
+    <!-- start rqt-->
+    <node name="rqt" pkg="rqt_reconfigure" type="rqt_reconfigure">
+    </node>
+
+
+ 
+</launch>
