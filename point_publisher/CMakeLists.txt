@@ -199,5 +199,7 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-  add_executable(main_node src/main.cpp)
-  target_link_libraries(main_node ${catkin_LIBRARIES})
+add_executable(point_publisher_node src/point_publisher.cpp)
+add_executable(point_visualization_node src/point_visualization.cpp)
+target_link_libraries(point_publisher_node ${catkin_LIBRARIES})
+target_link_libraries(point_visualization_node ${catkin_LIBRARIES})
